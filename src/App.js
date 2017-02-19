@@ -1,13 +1,7 @@
 import React from 'react';
 import Pagination from './components/pagination';
 import { connect } from 'react-redux';
-
-import { 
-    setPageNumber, 
-    setSearchFilter, 
-    //requestInitialData 
-    requestGifs
-} from '../src/actions/actions';
+import { setPageNumber, setSearchFilter, requestGifs } from '../src/actions/actions';
 
 class App extends React.Component {
 
@@ -17,7 +11,10 @@ class App extends React.Component {
     }
 
     render() {
-        //console.log('App data:::', this.props.data);
+        if (Object.getOwnPropertyNames(this.props.data).length === 0) {
+            return null;
+        }
+
         return (
             <Pagination 
                 data={this.props.data} 
@@ -26,23 +23,14 @@ class App extends React.Component {
                 totalNumPages={this.props.totalNumPages}
                 onChangePageNumber={this.props.setPageNumber}
                 onChangeSearchFilter={this.props.setSearchFilter}
-                currentSearchFilter={this.props.currentSearchFilter} /> 
+                currentSearchFilter={this.props.currentSearchFilter} />                 
         );
     }
 }
 
 const mapStateToProps = (store) => {
-    // console.log('store:: ', store.toJS());
-    // const currentSearchFilter = store.get('currentSearchFilter');
-    // console.log('data:: ', store.get('data'));
-    // const searchFilterData = store.getIn(['data', currentSearchFilter]);
-    // console.log('searchFilterData:: ', searchFilterData);
-
-    //console.log('store:: ', store.toJS());
     const currentSearchFilter = store.currentSearchFilter;
-    //console.log('data:: ', store.data);
     const searchFilterData = store.data[currentSearchFilter];
-    //console.log('searchFilterData:: ', searchFilterData);
 
     return { 
         currentPage: store.currentPage,
@@ -60,9 +48,6 @@ const mapDispatchToProps = (dispatch) => {
         setSearchFilter: (searchFilter) => {
             dispatch(setSearchFilter(searchFilter))
         },
-        // requestInitialData: () => {
-        //     dispatch(requestInitialData())
-        // }
         requestGifs: (searchFilter, limit, offset) => {
             dispatch(requestGifs(searchFilter, limit, offset))
         }
@@ -73,7 +58,6 @@ App.propTypes = {
     currentPage: React.PropTypes.number.isRequired,
     totalNumPages: React.PropTypes.number.isRequired,
     data: React.PropTypes.object.isRequired,
-    //data: React.PropTypes.instanceOf(Immutable.Map).isRequired,
     setSearchFilter: React.PropTypes.func.isRequired,
     setPageNumber: React.PropTypes.func.isRequired
 };

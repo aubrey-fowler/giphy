@@ -16,38 +16,8 @@ const initialState = {
     // },
 
     data: {
-        'Puppies': {
-            '0' : [
-                'l0HlRNXAPC0FBlKUM',
-                'l41m0CPz6UCnaUmxG',
-                'kwAi4WrChkSfm',
-                '3oz8xXS6gDYSNbqme4',
-                'l0ExvA6hnrdzQ5zoI'
-            ],
-            '1': [
-                'immFYe2gQStuU',
-                'QyaBgFR1Nkz5K',
-                'yXBqba0Zx8S4',
-                '26ybuMMAak2OrTaaQ',
-                '12wYJwhnA5CYda'
-            ]
-        },
-        'Kittens': {
-            '0' : [
-                'yFQ0ywscgobJK',
-                'KKKR0ZwHAzUsg',
-                'vAHZ9rc8rY8zm',
-                'Ol2yHMEFJdYEo',
-                'xT8qBt2943MLRO8zuM'
-            ],
-            '1': [
-                '5kjsIIc47PKRq',
-                'emWySpOLFLUAM',
-                '3oriO0OEd9QIDdllqo',
-                'TPXDdboFckd9u',
-                'p6DsF6TrStko8'
-            ]
-        }
+        'Puppies': {},
+        'Kittens': {}
     }
 };
 
