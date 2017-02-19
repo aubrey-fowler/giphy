@@ -3,3 +3,10 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.pagination-buttons > span {
+  height: 20px;
+  width: 20px;
+  background-color: pink;
+  margin: 10px 10px 10px 0;
+}

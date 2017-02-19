@@ -1,4 +1,5 @@
 import React from 'react';
+import '../index.css';
 
 class PaginationButtons extends React.Component {
 
@@ -13,7 +14,7 @@ class PaginationButtons extends React.Component {
     _handlePageNumberChange(event) {
         const pageNumber = parseInt(event.target.getAttribute('data-index-number'), 10);
         console.log('pageNumber:: ', pageNumber);
-        if (pageNumber !== this.props.currentPage) {
+        if (!isNaN(pageNumber) && pageNumber !== this.props.currentPage) {
             this.props.onChangePageNumber(pageNumber);
         }
     }
@@ -45,7 +46,6 @@ class PaginationButtons extends React.Component {
         if (this.props.currentPage === 0) {
             return null;
         }
-
         return (
             <span data-index-number={this.props.currentPage - 1}>
                 {'Prev'}
@@ -66,7 +66,7 @@ class PaginationButtons extends React.Component {
 
     render() {
         return (
-            <div onClick={this._handlePageNumberChange}>
+            <div className="pagination-buttons" onClick={this._handlePageNumberChange}>
                 <p>{' total num pages: '}{this.props.totalNumPages}</p>
                 <p>{' current page num: '}{this.props.currentPage}</p>
                 {this._renderPreviousButton()}
