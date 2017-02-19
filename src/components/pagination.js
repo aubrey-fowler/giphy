@@ -4,11 +4,12 @@ import PaginationButtons from './pagination-buttons';
 import RadioButtons from './radio-buttons';
 
 const options = ['Puppies', 'Kittens'];
+const IMAGES_PER_PAGE = 15;
 
 class Pagination extends React.Component {
-    
+
     _getTotalNumPages() {
-        return Math.ceil(this.props.numSearchResults / 15);
+        return Math.ceil(this.props.numSearchResults / IMAGES_PER_PAGE);
     }
 
     render() {

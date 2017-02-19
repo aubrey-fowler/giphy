@@ -18,7 +18,7 @@ class GiphyStillImage extends React.Component {
     render() {
         return (
             <img 
-                src={`http://media0.giphy.com/media/${this.props.id}/100_s.gif`} 
+                src={`http://media1.giphy.com/media/${this.props.id}/200w_s.gif`} 
                 alt="https://giphy.com/" 
                 onClick={this._handleClick} />
         );
