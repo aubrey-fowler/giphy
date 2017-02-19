@@ -3,7 +3,6 @@ import GiphyStillImage from './giphy-still-image';
 import { SpringGrid, measureItems, layout } from 'react-stonecutter';
 import '../index.css';
 
-
 const { pinterest } = layout;
 
 //page showing 15 giphy still images
@@ -26,29 +25,6 @@ class PaginationPage extends React.Component {
             </Grid>
         );
     }
-
-    // _renderArrayOfGiphyStillImages() {
-    //     let images = [];
-
-    //     for (var i = 0; i < this.props.items.length; i++) {
-    //         images.push(
-    //             <GiphyStillImage 
-    //                 key={this.props.items[i]}
-    //                 id={this.props.items[i]}
-    //                 onClick={this.props.onClick} />
-    //         );
-    //     }
-
-    //     return images;
-    // }
-
-    // render() {
-    //     return (
-    //         <div className="flex-container">
-    //             {this._renderArrayOfGiphyStillImages()}
-    //         </div>
-    //     );
-    // }
 }
 
 PaginationPage.propTypes = {

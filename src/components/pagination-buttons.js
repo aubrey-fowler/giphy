@@ -28,14 +28,19 @@ class PaginationButtons extends React.Component {
             min = 0;
         }
 
-        let max = this.props.currentPage + 4;
+        let max = this.props.currentPage + 5;
         if (max > this.props.totalNumPages) {
             max = this.props.totalNumPages;
         }
 
         for (var i = min; i < max; i++) {
             items.push(
-                <span key={'pagination-button-'+ i} data-index-number={i}>{i}</span>
+                <span 
+                    className={i === this.props.currentPage ? 'selected-pagination-button' : 'pagination-button'} 
+                    key={'pagination-button-'+ i} 
+                    data-index-number={i}>
+                        {i}
+                </span>
             );
         }
 
@@ -47,7 +52,7 @@ class PaginationButtons extends React.Component {
             return null;
         }
         return (
-            <span data-index-number={this.props.currentPage - 1}>
+            <span className="pagination-button" data-index-number={this.props.currentPage - 1}>
                 {'Prev'}
             </span>
         );
@@ -58,7 +63,7 @@ class PaginationButtons extends React.Component {
             return null;
         }
         return (
-            <span data-index-number={this.props.currentPage + 1}>
+            <span className="pagination-button" data-index-number={this.props.currentPage + 1}>
                 {'Next'}
             </span>
         );
