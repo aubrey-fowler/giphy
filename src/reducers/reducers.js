@@ -8,13 +8,10 @@ import {
 const initialState = {
     currentPage: 0,
     currentSearchFilter: 'Puppies',
-
-    // ,
-    // resultsPerSearchFilter: {
-    //     'Puppies': 0,
-    //     'Kittens': 0
-    // },
-
+    resultsPerSearchFilter: {
+        'Puppies': 0,
+        'Kittens': 0
+    },
     data: {
         'Puppies': {},
         'Kittens': {}
@@ -45,8 +42,12 @@ function requestInitialData(state, action) {
     var dataCopy = state.data;
     dataCopy[searchFilter] = pageData;
 
+    var numResultsCopy = state.resultsPerSearchFilter;
+    numResultsCopy[searchFilter] = action.totalNumSearchResults;
+
     return Object.assign({}, state, {
-        data: dataCopy
+        data: dataCopy,
+        resultsPerSearchFilter: numResultsCopy
     });
 }
 
@@ -63,7 +64,8 @@ function setGifsForPage(state, action) {
     dataCopy[state.currentSearchFilter][action.pageNumber.toString()] = action.idList;
 
     return Object.assign({}, state, {
-        data: dataCopy
+        data: dataCopy,
+        currentPage: action.pageNumber
     });
 }
 

@@ -26,7 +26,7 @@ function shouldFetchGifs(state, pageNumber) {
 export function setPageNumber(pageNumber) {
     return (dispatch, getState) => {
         if (shouldFetchGifs(getState(), pageNumber)) {
-            return dispatch(requestGifsForPage(getState().get('currentSearchFilter'), pageNumber));
+            return dispatch(requestGifsForPage(getState()['currentSearchFilter'], pageNumber));
         } else {
             return dispatch(updatePageNumber(pageNumber));
         }

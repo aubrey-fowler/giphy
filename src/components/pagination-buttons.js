@@ -11,7 +11,6 @@ class PaginationButtons extends React.Component {
     }
 
     _handlePageNumberChange(event) {
-        console.log(event.target);
         const pageNumber = parseInt(event.target.getAttribute('data-index-number'), 10);
         console.log('pageNumber:: ', pageNumber);
         if (pageNumber !== this.props.currentPage) {

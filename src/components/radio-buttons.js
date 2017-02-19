@@ -11,7 +11,6 @@ class RadioButtons extends React.Component {
     }
 
     _handleOptionClick(event) {
-        console.log('_handleOptionClick: ', event.target.value);
         this.props.onChange(event.target.value);
     }
 
@@ -39,12 +38,16 @@ class RadioButtons extends React.Component {
         return (
             <div>
                 {this._renderRadioSelections()}
+                <p>
+                    {this.props.numSearchResults}{' GIFs found for '}{this.props.selected}
+                </p>
             </div>
         );
     }
 }
 
 RadioButtons.propTypes = {
+    numSearchResults: React.PropTypes.number.isRequired,
     options: React.PropTypes.array.isRequired,
     selected: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func.isRequired

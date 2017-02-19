@@ -20,7 +20,7 @@ class App extends React.Component {
                 data={this.props.data} 
                 onClick={function(id){console.log('id::: ', id);}} 
                 currentPage={this.props.currentPage} 
-                totalNumPages={this.props.totalNumPages}
+                numSearchResults={this.props.numSearchResults}
                 onChangePageNumber={this.props.setPageNumber}
                 onChangeSearchFilter={this.props.setSearchFilter}
                 currentSearchFilter={this.props.currentSearchFilter} />                 
@@ -34,7 +34,7 @@ const mapStateToProps = (store) => {
 
     return { 
         currentPage: store.currentPage,
-        totalNumPages: Object.keys(searchFilterData).length,
+        numSearchResults: store.resultsPerSearchFilter[currentSearchFilter],
         data: searchFilterData,
         currentSearchFilter: currentSearchFilter
     };
@@ -56,7 +56,7 @@ const mapDispatchToProps = (dispatch) => {
 
 App.propTypes = {
     currentPage: React.PropTypes.number.isRequired,
-    totalNumPages: React.PropTypes.number.isRequired,
+    numSearchResults: React.PropTypes.number.isRequired,
     data: React.PropTypes.object.isRequired,
     setSearchFilter: React.PropTypes.func.isRequired,
     setPageNumber: React.PropTypes.func.isRequired
