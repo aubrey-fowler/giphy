@@ -21,21 +21,57 @@ class PaginationButtons extends React.Component {
     _renderPageNumbers() {
         let items = [];
 
-        for (var i = 0; i < this.props.totalNumPages; i++) {
+        // display 4 behind and 4 in front
+        let min = this.props.currentPage - 4;
+        if (min < 0) {
+            min = 0;
+        }
+
+        let max = this.props.currentPage + 4;
+        if (max > this.props.totalNumPages) {
+            max = this.props.totalNumPages;
+        }
+
+        for (var i = min; i < max; i++) {
             items.push(
-                <div key={'pagination-button-'+ i} data-index-number={i}>{i}</div>
+                <span key={'pagination-button-'+ i} data-index-number={i}>{i}</span>
             );
         }
 
         return items;
     }
 
+    _renderPreviousButton() {
+        if (this.props.currentPage === 0) {
+            return null;
+        }
+
+        return (
+            <span data-index-number={this.props.currentPage - 1}>
+                {'Prev'}
+            </span>
+        );
+    }
+
+    _renderNextButton() {
+        if (this.props.totalNumPages === 0) {
+            return null;
+        }
+        return (
+            <span data-index-number={this.props.currentPage + 1}>
+                {'Next'}
+            </span>
+        );
+    }
+
     render() {
         return (
             <div onClick={this._handlePageNumberChange}>
-                {' total num pages: '}{this.props.totalNumPages}
-                {' current page num: '}{this.props.currentPage}
+                <p>{' total num pages: '}{this.props.totalNumPages}</p>
+                <p>{' current page num: '}{this.props.currentPage}</p>
+                {this._renderPreviousButton()}
                 {this._renderPageNumbers()}
+                {this._renderNextButton()}
             </div>
         );
     }
