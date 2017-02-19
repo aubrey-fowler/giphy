@@ -3,3 +3,19 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.flex-container {
+	/*
+    display: -webkit-flex; 
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+    background-color: lightgrey;
+    */
+}
+
+.flex-item {
+
+}

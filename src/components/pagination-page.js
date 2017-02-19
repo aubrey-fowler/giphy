@@ -21,7 +21,7 @@ class PaginationPage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="flex-container">
                 {this._renderArrayOfGiphyStillImages()}
             </div>
         );

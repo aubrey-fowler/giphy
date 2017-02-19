@@ -1,0 +1,6 @@
+export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER';
+export const SET_SEARCH_FILTER = 'SET_SEARCH_FILTER';
+
+
+export const RECIEVE_GIFS = 'RECIEVE_GIFS';
+export const REQUEST_GIFS = 'REQUEST_GIFS';

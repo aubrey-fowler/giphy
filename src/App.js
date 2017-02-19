@@ -1,33 +1,67 @@
 import React from 'react';
 import Pagination from './components/pagination';
+import { connect } from 'react-redux';
+import { setPageNumber, setSearchFilter, //requestInitialData 
+
+requestGifs
+} from '../src/actions/actions';
 
 class App extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.entries = {
-            '0': [
-                'l0HlRNXAPC0FBlKUM', 
-                'l41m0CPz6UCnaUmxG',
-                'kwAi4WrChkSfm',
-                '3oz8xXS6gDYSNbqme4',
-                'l0ExvA6hnrdzQ5zoI'
-            ]
-        };
+    componentDidMount() {
+        this.props.requestGifs('Puppies', 15, 0);
     }
 
     render() {
         return (
-            <div>
-                <Pagination 
-                    data={this.entries} 
-                    onClick={function(id){console.log('id::: ', id);}} 
-                    currentPage={0} 
-                    totalNumPages={1} /> 
-            </div>
+            <Pagination 
+                data={this.props.data} 
+                onClick={function(id){console.log('id::: ', id);}} 
+                currentPage={this.props.currentPage} 
+                totalNumPages={this.props.totalNumPages}
+                onChangePageNumber={this.props.setPageNumber}
+                onChangeSearchFilter={this.props.setSearchFilter}
+                currentSearchFilter={this.props.currentSearchFilter} /> 
         );
     }
 }
 
-export default App;
+const mapStateToProps = (store) => {
+    return { 
+        currentPage: store.currentPage,
+        totalNumPages: Object.keys(store.data[store.currentSearchFilter]).length,
+        data: store.data[store.currentSearchFilter],
+        currentSearchFilter: store.currentSearchFilter
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setPageNumber: (pageNumber) => {
+            dispatch(setPageNumber(pageNumber))
+        },
+        setSearchFilter: (searchFilter) => {
+            dispatch(setSearchFilter(searchFilter))
+        },
+        // requestInitialData: () => {
+        //     dispatch(requestInitialData())
+        // }
+        requestGifs: (searchFilter, limit, offset) => {
+            dispatch(requestGifs(searchFilter, limit, offset))
+        }
+    };
+}
+
+App.propTypes = {
+    currentPage: React.PropTypes.number.isRequired,
+    totalNumPages: React.PropTypes.number.isRequired,
+    data: React.PropTypes.object.isRequired,
+    setSearchFilter: React.PropTypes.func.isRequired,
+    setPageNumber: React.PropTypes.func.isRequired
+};
+
+App.contextTypes = {
+    store: React.PropTypes.object.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
