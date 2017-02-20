@@ -3,9 +3,7 @@ import PaginationPage from './pagination-page';
 import PaginationButtons from './pagination-buttons';
 import RadioButtons from './radio-buttons';
 import StatelessModal from './stateless-modal';
-
-const options = ['Puppies', 'Kittens'];
-const IMAGES_PER_PAGE = 15;
+import { IMAGES_PER_PAGE, options } from '../constants/constants';
 
 class Pagination extends React.Component {
 

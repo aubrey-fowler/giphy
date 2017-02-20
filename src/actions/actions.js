@@ -11,6 +11,7 @@ import {
 } from './actionTypes'; 
 
 import { checkStatus, parseJSON, getIdList, getResults } from './actionUtils';
+import { IMAGES_PER_PAGE } from '../constants/constants';
 
 export function updatePageNumber(pageNumber) {  
     return {
@@ -102,9 +103,9 @@ export function requestGifs(searchFilter, limit, offset) {
 }
 
 export function requestGifsForPage(searchFilter, pageNumber) {
-    var offset = pageNumber * 15;
+    var offset = pageNumber * IMAGES_PER_PAGE;
     return dispatch => {
-        return fetch(`http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${searchFilter}&limit=15&offset=${offset}`)
+        return fetch(`http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${searchFilter}&limit=${IMAGES_PER_PAGE}&offset=${offset}`)
             .then(checkStatus)
             .then(parseJSON)
             .then(getIdList)
@@ -114,9 +115,9 @@ export function requestGifsForPage(searchFilter, pageNumber) {
 }
 
 export function requestGifsForFilter(searchFilter, pageNumber) {
-    var offset = pageNumber * 15;
+    var offset = pageNumber * IMAGES_PER_PAGE;
     return dispatch => {
-        return fetch(`http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${searchFilter}&limit=15&offset=${offset}`)
+        return fetch(`http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${searchFilter}&limit=${IMAGES_PER_PAGE}&offset=${offset}`)
             .then(checkStatus)
             .then(parseJSON)
             .then(getIdList)

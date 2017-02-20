@@ -7,6 +7,8 @@ import {
     SET_MODAL_VISIBILITY 
 } from '../actions/actionTypes';
 
+import { IMAGES_PER_PAGE } from '../constants/constants';
+
 const initialState = {
     currentPage: 0,
     currentSearchFilter: 'Puppies',
@@ -45,7 +47,7 @@ function requestInitialData(state, action) {
     const searchFilter = action.searchFilter;
 
     var pageData = {};
-    var groupedArray = createGroupedArray(action.idList, 15);
+    var groupedArray = createGroupedArray(action.idList, IMAGES_PER_PAGE);
     for (var i = 0; i < groupedArray.length; i++) {
         pageData[i.toString()] = groupedArray[i];
     }
@@ -70,6 +72,7 @@ function createGroupedArray(arr, chunkSize) {
     return groups;
 }
 
+// on a filter, changing the page
 function setGifsForPage(state, action) {
     var dataCopy = state.data;
     dataCopy[state.currentSearchFilter][action.pageNumber.toString()] = action.idList;
@@ -80,9 +83,27 @@ function setGifsForPage(state, action) {
     });
 }
 
+// on a page, changing filter
 function setGifsForFilter(state, action) {
     var dataCopy = state.data;
-    dataCopy[action.filter][state.currentPage.toString()] = action.idList;
+
+    let pageNum = state.currentPage;
+    const filterPageNum = Math.ceil(state.resultsPerSearchFilter[action.filter] / IMAGES_PER_PAGE);
+
+    //catch the edge case where the new filter has less pages than the previous one
+    if (filterPageNum < pageNum) {
+        console.log(' edge case ');
+        pageNum = filterPageNum;
+        dataCopy[action.filter][pageNum.toString()] = action.idList;
+
+        return Object.assign({}, state, {
+            data: dataCopy,
+            currentSearchFilter: action.filter,
+            currentPage: pageNum
+        });
+    }
+
+    dataCopy[action.filter][pageNum.toString()] = action.idList;
 
     return Object.assign({}, state, {
         data: dataCopy,
