@@ -11,6 +11,7 @@
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-skylight": "^0.4.1",
     "react-stonecutter": "^0.3.4",
     "whatwg-fetch": "^2.0.2"
   },

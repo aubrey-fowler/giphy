@@ -1,7 +1,7 @@
 import React from 'react';
 import Pagination from './components/pagination';
 import { connect } from 'react-redux';
-import { setPageNumber, setSearchFilter, requestGifs } from '../src/actions/actions';
+import { setPageNumber, setSearchFilter, requestGifs, setModalVisibility } from '../src/actions/actions';
 
 class App extends React.Component {
 
@@ -18,7 +18,9 @@ class App extends React.Component {
         return (
             <Pagination 
                 data={this.props.data} 
-                onClick={function(id){console.log('id::: ', id);}} 
+                onClick={this.props.setModalVisibility}
+                isModalVisible={this.props.isModalVisible} 
+                modalVideoId={this.props.modalVideoId}
                 currentPage={this.props.currentPage} 
                 numSearchResults={this.props.numSearchResults}
                 onChangePageNumber={this.props.setPageNumber}
@@ -36,20 +38,25 @@ const mapStateToProps = (store) => {
         currentPage: store.currentPage,
         numSearchResults: store.resultsPerSearchFilter[currentSearchFilter],
         data: searchFilterData,
-        currentSearchFilter: currentSearchFilter
+        currentSearchFilter: currentSearchFilter,
+        isModalVisible: store.isModalVisible,
+        modalVideoId: store.modalVideoId
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         setPageNumber: (pageNumber) => {
-            dispatch(setPageNumber(pageNumber))
+            dispatch(setPageNumber(pageNumber));
         },
         setSearchFilter: (searchFilter) => {
-            dispatch(setSearchFilter(searchFilter))
+            dispatch(setSearchFilter(searchFilter));
         },
         requestGifs: (searchFilter, limit, offset) => {
-            dispatch(requestGifs(searchFilter, limit, offset))
+            dispatch(requestGifs(searchFilter, limit, offset));
+        },
+        setModalVisibility: (id) => {
+            dispatch(setModalVisibility(id));
         }
     };
 }
@@ -59,7 +66,9 @@ App.propTypes = {
     numSearchResults: React.PropTypes.number.isRequired,
     data: React.PropTypes.object.isRequired,
     setSearchFilter: React.PropTypes.func.isRequired,
-    setPageNumber: React.PropTypes.func.isRequired
+    setPageNumber: React.PropTypes.func.isRequired,
+    isModalVisible: React.PropTypes.bool.isRequired,
+    modalVideoId: React.PropTypes.string
 };
 
 App.contextTypes = {

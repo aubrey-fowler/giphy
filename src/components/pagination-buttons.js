@@ -39,7 +39,7 @@ class PaginationButtons extends React.Component {
                     className={i === this.props.currentPage ? 'selected-pagination-button' : 'pagination-button'} 
                     key={'pagination-button-'+ i} 
                     data-index-number={i}>
-                        {i}
+                        {i + 1}
                 </span>
             );
         }
@@ -73,7 +73,6 @@ class PaginationButtons extends React.Component {
         return (
             <div className="pagination-buttons" onClick={this._handlePageNumberChange}>
                 <p>{' total num pages: '}{this.props.totalNumPages}</p>
-                <p>{' current page num: '}{this.props.currentPage}</p>
                 {this._renderPreviousButton()}
                 {this._renderPageNumbers()}
                 {this._renderNextButton()}

@@ -3,6 +3,8 @@ import PaginationPage from './pagination-page';
 import PaginationButtons from './pagination-buttons';
 import RadioButtons from './radio-buttons';
 
+import StatelessModal from './stateless-modal';
+
 const options = ['Puppies', 'Kittens'];
 const IMAGES_PER_PAGE = 15;
 
@@ -15,6 +17,10 @@ class Pagination extends React.Component {
     render() {
         return (
             <div>
+                <StatelessModal 
+                    id={this.props.modalVideoId}
+                    isVisible={this.props.isModalVisible} 
+                    onCloseModal={this.props.onClick} />
                 <RadioButtons
                     numSearchResults={this.props.numSearchResults} 
                     options={options} 
@@ -39,7 +45,9 @@ Pagination.propTypes = {
     onClick: React.PropTypes.func.isRequired,
     onChangePageNumber: React.PropTypes.func.isRequired,
     onChangeSearchFilter: React.PropTypes.func.isRequired,
-    currentSearchFilter: React.PropTypes.string.isRequired
+    currentSearchFilter: React.PropTypes.string.isRequired,
+    isModalVisible: React.PropTypes.bool.isRequired,
+    modalVideoId: React.PropTypes.string
 };
 
 export default Pagination;
