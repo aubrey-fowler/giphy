@@ -19,7 +19,7 @@ The build is minified and the filenames include the hashes.<br>
 To run the app in production mode please install pushstate-server.<br>
 
 npm install -g pushstate-server<br>
-pushstate-server build<br>
+### `pushstate-server build`
 start [http://localhost:9000](http://localhost:9000)<br>
 
 Open [http://localhost:9000](http://localhost:9000) to view it in the browser.
