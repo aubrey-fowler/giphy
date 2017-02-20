@@ -2,12 +2,16 @@ import {
     SET_PAGE_NUMBER, 
     SET_SEARCH_FILTER,
     RECIEVE_GIFS,
-    RECIEVE_GIFS_FOR_PAGE 
+    RECIEVE_GIFS_FOR_PAGE,
+    RECIEVE_GIFS_FOR_FILTER,
+    SET_MODAL_VISIBILITY 
 } from '../actions/actionTypes';
 
 const initialState = {
     currentPage: 0,
     currentSearchFilter: 'Puppies',
+    isModalVisible: false,
+    modalVideoId: null,
     resultsPerSearchFilter: {
         'Puppies': 0,
         'Kittens': 0
@@ -21,6 +25,13 @@ const initialState = {
 function setPageNumber(state, action) {
     return Object.assign({}, state, {
         currentPage: action.pageNumber
+    });
+}
+
+function setModalVisibility(state, action) {
+    return Object.assign({}, state, {
+        isModalVisible: !state.isModalVisible,
+        modalVideoId: action.id === undefined ? null : action.id
     });
 }
 
@@ -69,12 +80,24 @@ function setGifsForPage(state, action) {
     });
 }
 
+function setGifsForFilter(state, action) {
+    var dataCopy = state.data;
+    dataCopy[action.filter][state.currentPage.toString()] = action.idList;
+
+    return Object.assign({}, state, {
+        data: dataCopy,
+        currentSearchFilter: action.filter
+    });
+}
+
 export function appReducer(state = initialState, action) {
     switch(action.type) {
         case RECIEVE_GIFS: return requestInitialData(state, action);
         case RECIEVE_GIFS_FOR_PAGE: return setGifsForPage(state, action);
-        case SET_PAGE_NUMBER : return setPageNumber(state, action);
-        case SET_SEARCH_FILTER : return setSearchFilter(state, action);
+        case RECIEVE_GIFS_FOR_FILTER: return setGifsForFilter(state, action);
+        case SET_PAGE_NUMBER: return setPageNumber(state, action);
+        case SET_SEARCH_FILTER: return setSearchFilter(state, action);
+        case SET_MODAL_VISIBILITY: return setModalVisibility(state, action);
         default : return state;
     }
 }

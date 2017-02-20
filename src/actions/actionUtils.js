@@ -21,3 +21,11 @@ export function getIdList(data) {
 
     return idList;
 }
+
+export function getResults(data) {
+    const result = {
+        idList: getIdList(data),
+        total: data.pagination.total_count
+    };
+    return result;
+}
