@@ -11,7 +11,10 @@ class RadioButtons extends React.Component {
     }
 
     _handleOptionClick(event) {
-        this.props.onChange(event.target.value);
+        const value = event.target.getAttribute('value');
+        if (value != null) {
+            this.props.onChange(value);
+        }
     }
 
     _renderRadioSelections() {
@@ -20,14 +23,12 @@ class RadioButtons extends React.Component {
         for (var i = 0; i < this.props.options.length; i++) {
             const value = this.props.options[i];
             items.push(
-                <label key={'radio-button-' + value}>
-                    <input 
-                        type="radio" 
-                        checked={this.props.selected === value} 
-                        onChange={this._handleOptionClick} 
-                        value={value} /> 
-                    {value}
-                </label>
+                <span 
+                    key={'radio-button-'+ i} 
+                    className={this.props.selected === value ? 'selected-pagination-button' : 'pagination-button'} 
+                    value={value}>
+                        {value}
+                </span>
             );
         }
 
@@ -36,7 +37,7 @@ class RadioButtons extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="pagination-buttons" onClick={this._handleOptionClick}>
                 {this._renderRadioSelections()}
                 <p>
                     {this.props.numSearchResults}{' GIFs found for '}{this.props.selected}

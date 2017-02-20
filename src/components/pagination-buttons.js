@@ -13,7 +13,6 @@ class PaginationButtons extends React.Component {
 
     _handlePageNumberChange(event) {
         const pageNumber = parseInt(event.target.getAttribute('data-index-number'), 10);
-        console.log('pageNumber:: ', pageNumber);
         if (!isNaN(pageNumber) && pageNumber !== this.props.currentPage) {
             this.props.onChangePageNumber(pageNumber);
         }
@@ -72,7 +71,6 @@ class PaginationButtons extends React.Component {
     render() {
         return (
             <div className="pagination-buttons" onClick={this._handlePageNumberChange}>
-                <p>{' total num pages: '}{this.props.totalNumPages}</p>
                 {this._renderPreviousButton()}
                 {this._renderPageNumbers()}
                 {this._renderNextButton()}

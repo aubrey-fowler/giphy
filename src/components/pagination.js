@@ -2,7 +2,6 @@ import React from 'react';
 import PaginationPage from './pagination-page';
 import PaginationButtons from './pagination-buttons';
 import RadioButtons from './radio-buttons';
-
 import StatelessModal from './stateless-modal';
 
 const options = ['Puppies', 'Kittens'];
